@@ -30,5 +30,12 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    'chunk_holder' => [
+        'url' => env('CHUNK_HOLDER_URL'),
+        'key' => env('CHUNK_HOLDER_KEY'),
+    ],
+    'inference_runner' => [
+        'url' => env('INFERENCE_RUNNER_URL'),
+        'key' => env('INFERENCE_RUNNER_KEY'),
+    ],
 ];

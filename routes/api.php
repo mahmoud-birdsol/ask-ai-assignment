@@ -17,3 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('ask', function (
+    Request $request,
+    \App\Services\InferenceRunner $inferenceRunner,
+    \App\Services\ChunkHolder $chunkHolder
+) {
+    if (empty($request->input('question'))) {
+        return [];
+    }
+
+    $chunks = $inferenceRunner->run($request->input('question'));
+
+    if (! count($chunks)) {
+        return [];
+    }
+
+    return $chunkHolder->ask($chunks, 70);
+})->name('api.ask');
